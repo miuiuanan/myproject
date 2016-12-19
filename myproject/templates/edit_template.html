@@ -1,0 +1,61 @@
+{% extends "Home_Template.html" %}
+
+{% block list %}
+    {% csrf_token %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        function update_template(csrftoken, ex_id) {
+            var name = $("#name").val();
+            var subtitle = $("#subtitle").val();
+            var price = $("#price").val();
+            var hitcount = $("#hitcount").val();
+            var image = $("#image").val();
+
+            $.ajax({
+                url: "/design/edit/" + ex_id + "/",
+                type: "POST",
+                data: {'name': name, 'subtitle': subtitle, 'image': image, 'price': price, 'hitcount': hitcount},
+                beforeSend: function (xhr, settings) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                },
+                success: function (json) {
+                    alert("OK");
+                },
+                error: function (xhr, errmsg, err) {
+                    console.log(xhr.status + ": " + xhr.responseText);
+                }
+            });
+        };
+
+    </script>
+    <h3 style="margin-left: 30px">Update Course</h3>
+    <table class="table-show" cellspacing="10px">
+        <tr>
+            <td>Name:</td>
+            <td>{{ form.name }}</td>
+        </tr>
+        <tr>
+            <td>Subtitle:</td>
+            <td>{{ form.subtitle }}</td>
+        </tr>
+        <tr>
+            <td>Image:</td>
+            <td>{{ form.image }}</td>
+        </tr>
+        <tr>
+            <td>Price:</td>
+            <td>{{ form.price }}</td>
+        </tr>
+        <tr>
+            <td>
+
+            </td>
+            <td>
+                <button class="btn btn-primary" type="button" onclick="update_template('{{ csrf_token }}', '{{ design.id }}')">Save</button>
+{#                <button class="btn btn-primary" type="submit">Save</button>#}
+                <a class="btn btn-primary" href="/design/detailTemplate/{{ design.id }}/">Back</a>
+            </td>
+        </tr>
+    </table>
+
+{% endblock %}

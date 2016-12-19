@@ -1,0 +1,8 @@
+{%extends "base.html"%}
+
+{% block abc %}
+    Day danh sach chuyen muc
+    {% for item in list_category %}
+        <a href="/demo/detail123/{{ item.id }}/">{{ item.name }}</a>
+    {% endfor %}
+{% endblock %}

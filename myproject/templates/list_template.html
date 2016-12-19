@@ -1,0 +1,64 @@
+{% extends "Home_Template.html" %}
+
+{% block list %}
+    {% load static %}
+    <div class="list-courses">
+        {% for item in ex_templates %}
+            <div class="col-sm-4 col-lg-4 col-md-4">
+                <div class="thumbnail">
+                    <img src="{{ item.image }}" alt="">
+                    <div class="caption">
+                        <h4 class="pull-right">${{ item.price }}</h4>
+                        <h4><a href="/design/detailTemplate/{{ item.id }}/">{{ item.name }}</a>
+                        </h4>
+                        <p>{{ item.subtitle }}</p>
+                    </div>
+                    <div class="ratings">
+                        <p class="pull-right">{{ item.hitcount }} reviews</p>
+                        <p>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="page">
+        <table>
+            <tr>
+                <td>
+                    <h4 class="step-links">
+                        {% if ex_templates.has_previous %}
+                            <a href="?page={{ ex_templates.previous_page_number }}">Previous</a>
+                        {% endif %}
+                    </h4>
+                </td>
+                <td>
+
+                    <h4 class="current"> Page {{ ex_templates.number }} of {{ ex_templates.paginator.num_pages }}.  </h4>
+                </td>
+                <td>
+                    <h4>
+                        {% if ex_templates.has_next %}
+                            <a href="?page={{ ex_templates.next_page_number }}">Next</a>
+                        {% endif %}
+                    </h4>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <style>
+        .page {
+            width: 100%;
+            text-align: center;
+            display: inline-block;
+            padding-left: 0;
+            margin: 10px 20px;
+            border-radius: 4px
+        }
+    </style>
+{% endblock %}

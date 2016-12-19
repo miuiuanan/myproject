@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block xyz %}
+    {% if cate123 %}
+        Thong tin chi tiet la:
+        <h2>ID: {{ cate123.id }}</h2>
+        <h2>Name:{{ cate123.name }}</h2>
+    {% else %}
+        <h4>Khong ton tai ban ghi nao</h4>
+    {% endif %}
+{% endblock %}
